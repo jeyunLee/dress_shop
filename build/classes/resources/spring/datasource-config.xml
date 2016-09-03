@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Application context definition for Login Datasource.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- ========================= DATASOURCE DEFINITION ========================= -->
+
+    <!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+    <!-- (in this case, JDBC-related settings for the dataSource definition below) -->
+    <context:property-placeholder location="classpath:resources/spring/data-access.properties" system-properties-mode="OVERRIDE"/>
+
+    <!-- DataSource configuration for the tomcat jdbc connection pool 
+    See here for more details on commons-dbcp versus tomcat-jdbc: 
+    http://blog.ippon.fr/2013/03/13/improving-the-performance-of-the-spring-petclinic-sample-application-part-3-of-5/-->
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+          p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
+          p:username="${jdbc.username}" p:password="${jdbc.password}"
+          p:initialSize="2"
+          p:maxActive="100"
+          p:maxIdle="10"
+          p:minIdle="3"
+          p:maxWait="30000"
+          p:removeAbandoned="true"
+          p:removeAbandonedTimeout="30"/>
+    
+    <!--  상단과 동일한 의미       
+    <bean id="dataSource class="org.apache.tomcat.jdbc.pool.DataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />		
+	</bean>
+	--> 
+</beans>
+

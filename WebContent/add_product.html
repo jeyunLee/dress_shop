@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>분류번호</td>
+			<td>상세분류번호</td>
+			<td>상품번호</td>
+			<td>상품이미지</td>
+			<td>상품명</td>
+			<td>상품설명</td>
+			<td>가격</td>
+			<td>사이즈</td>
+			<td>색상</td>
+			
+		</tr>
+			<form action="insert_product" method="post">
+				<tr>
+				<td><input type="text" name="category_id" ></td>
+				<td><input type="text" name="item_id" ></td>
+				<td><input type="text" name="product_id" ></td>
+				<td><input type="text" name="image_address" ></td>
+				<td><input type="text" name="product_name"></td>
+				<td><input type="text" name="description" ></td>
+				<td><input type="text" name="price" ></td>
+				<td><input type="text" name="size" ></td>
+				<td><input type="text" name="color" ></td>
+				</tr>
+				<tr><td><button type="submit">등록</button></td></tr>
+			</form>
+	</table>
+</body>
+</html>

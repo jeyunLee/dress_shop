@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.bit.dress_shop.repository.mybatis.mapper.MemberMapper'>
+	<insert id='addMember' parameterType="com.bit.dress_shop.domain.Member">
+		insert into member values (#{id}, #{password}, #{name}, #{birth}, #{gender}, #{zipcode}, #{address1}, #{address2}, #{telePhone}, #{cellPhone}, #{email})
+	</insert>
+	<update id='updateMember' parameterType="com.bit.dress_shop.domain.Member">
+		update member set password=#{password}, name=#{name}, birth=#{birth}, gender=#{gender}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2}, telephone=#{telePhone}, cellphone=#{cellPhone}, email=#{email} where id=#{id} 
+	</update>
+	<delete id='deleteMember' parameterType="com.bit.dress_shop.domain.Member">
+		delete from member where id = #{id} and password = #{password}
+	</delete>
+	<select id='loginMember' resultMap="MemberResultMap">
+		select id, password from member where id=#{id} and password=#{password}
+	</select>
+	<select id='showMember' resultMap="MemberResultMap">
+		select * from member where id = #{id}
+	</select>
+	<resultMap id="MemberResultMap" type="com.bit.dress_shop.domain.Member">
+		<id property="id" column="id" />
+		<result property="password" column="password" />
+		<result property="name" column="name" />
+		<result property="birth" column="birth" />
+		<result property="gender" column="gender" />
+		<result property="zipcode" column="zipcode" />
+		<result property="address1" column="address1" />
+		<result property="address2" column="address2" />
+		<result property="telePhone" column="telephone" />
+		<result property="cellPhone" column="cellphone" />
+		<result property="email" column="email" />
+	</resultMap>
+</mapper>

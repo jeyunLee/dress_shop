@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Repository and Service layers
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+ 
+    <!-- ========================= RESOURCE DEFINITIONS ========================= -->
+
+    <!-- import the dataSource definition -->
+    <import resource="datasource-config.xml"/>
+
+    <context:component-scan base-package="com.bit.dress_shop.repository.mybatis"/>
+    <context:component-scan base-package="com.bit.dress_shop.service"/>
+
+	<!-- enable autowire -->
+    <context:annotation-config />
+    
+    <!-- enables scanning for @Transactional annotations -->
+    <tx:annotation-driven />
+    
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- Mybatis Setting -->
+    <!-- define the SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:resources/mybatis/mybatis-config.xml" />
+<!--      	<property name="mapperLocations" value="classpath:resources/mybatis/mapper/*.xml" />  -->
+    	<property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <mybatis:scan base-package="com.bit.dress_shop.repository.mybatis.mapper" />
+
+    <!-- scan for mappers and let them be autowired -->
+    <!--  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.bit.newproject.repository.mybatis.mapper" />
+    </bean> -->	
+</beans>

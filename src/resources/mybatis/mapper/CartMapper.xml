@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.bit.dress_shop.repository.mybatis.mapper.CartMapper'>
+	<resultMap id="CartResultMap" type="com.bit.dress_shop.domain.Cart">
+		<id property="cart_id" column="cart_id"  />
+		<result property="session_id" column="session_id" />
+		<result property="product_id" column="product_id" />
+		<result property="image_address" column="image_address" />
+		<result property="qty" column="qty" />
+		<result property="price" column="price" />
+		<result property="product_name" column="product_name" />
+		<result property="size" column="size" />
+		<result property="color" column="color" />
+	</resultMap>
+	<insert id="addCart" parameterType="com.bit.dress_shop.domain.Cart">
+		insert into cart values (#{cart_id}, #{session_id}, #{product_id}, #{product_name}, #{qty}, #{price}#, #{size}, #{color})
+	</insert>
+	<select id="showCart" resultMap="CartResultMap">
+		select * from cart where session_id = #{session_id}
+	</select>
+	<delete id="deleteCart" parameterType="com.bit.dress_shop.domain.Cart">
+		delete from cart where cart_id = #{cart_id}
+	</delete>
+	<update id="updateCart" parameterType="com.bit.dress_shop.domain.Cart">
+		update cart set session_id = #{session_id}, product_id = #{product_id}, image_address = #{image_address}, qty = #{qty}, price = #{price}, product_name = #{product_name}, size = #{size}, color = #{color} where cart_id = #{cart_id}
+		update member set password=#{password}, name=#{n
+	</update>
+</mapper>
